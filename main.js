@@ -116,5 +116,6 @@ function employeeRandom(){
         birthDate,
         workload
     };
+}
 
 
