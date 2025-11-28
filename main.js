@@ -1,11 +1,10 @@
-**
+/**
  * @brief Generuje náhodný seznam zaměstnanců na základě zadaného počtu a věkového limitu.
  * @param {object} dtoIn Vstupní objekt obsahující: count (počet zaměstnanců), age limit {min, max} (věkové rozpětí).
  * @returns {object} dtoOut Objekt s polem vygenerovaných zaměstnanců: { employees: Array<Employee> }.
  */
 
-    
-export function main(dtoIn) {
+    export function main(dtoIn) {
    let employeeCount = 0;
     let employees = []
    while(employeeCount < dtoIn.count){
