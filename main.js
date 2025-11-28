@@ -1,7 +1,7 @@
 /**
  * @brief Generuje náhodný seznam zaměstnanců na základě zadaného počtu a věkového limitu.
  * @param {object} dtoIn Vstupní objekt obsahující: count (počet zaměstnanců), age limit {min, max} (věkové rozpětí).
- * @returns {object} dtoOut Objekt s polem vygenerovaných zaměstnanců: { employees: Array<Employee> }.
+ * @returns {Array} dtoOut pole vygenerovaných zaměstnanců.
  */
 
     export function main(dtoIn) {
@@ -22,9 +22,7 @@
       employeeCount++;
     };
 
- return {
-    employees
- };
+ return employees;
 };
 
 const names = {
