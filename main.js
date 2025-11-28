@@ -1,16 +1,15 @@
-//TODO add imports if needed
-//TODO doc
-/**
- * The main function which calls the application. 
- * Please, add specific description here for the application purpose.
- * @param {object} dtoIn contains count of employees, age limit of employees {min, max}
- * @returns {Array} of employees
+**
+ * @brief Generuje náhodný seznam zaměstnanců na základě zadaného počtu a věkového limitu.
+ * @param {object} dtoIn Vstupní objekt obsahující: count (počet zaměstnanců), age limit {min, max} (věkové rozpětí).
+ * @returns {object} dtoOut Objekt s polem vygenerovaných zaměstnanců: { employees: Array<Employee> }.
  */
+
+    
 export function main(dtoIn) {
    let employeeCount = 0;
     let employees = []
    while(employeeCount < dtoIn.count){
-      const employee = employeeRandom();
+      const employee = employeeRandom(dtoIn);
       
 
       employees.push({
@@ -84,7 +83,7 @@ function randomBday(minAge, maxAge) {
 }
  
 
-function employeeRandom(){
+function employeeRandom(dtoIn){
     let genderOpt = ["female", "male"];
     let name = "";
     let surname = "";
