@@ -4,22 +4,41 @@
  * @returns {Array} dtoOut pole vygenerovaných zaměstnanců.
  */
 
-    export function main(dtoIn) {
-   let employeeCount = 0;
-    let employees = []
-   while(employeeCount < dtoIn.count){
-      const employee = employeeRandom(dtoIn);
-      
+export function main(dtoIn) {
+    let employeeCount = 0;
+    let employees = [];
+    
+    // Hlavní cyklus: opakujeme, dokud nemáme požadovaný počet zaměstnanců
+    while(employeeCount < dtoIn.count){
+        let employee;
+        let isDuplicate = true; // Předpokládáme, že je datum duplikátní
 
-      employees.push({
-        name: employee.name,
-        surname: employee.surname,
-        gender: employee.gender,
-        birthdate: employee.birthdate,
-        workload: employee.workload
-      });
+        // Vnitřní cyklus: generujeme, dokud nenajdeme unikátní datum narození
+        while(isDuplicate) {
+            
+            employee = employeeRandom(dtoIn);
+            isDuplicate = false; // Resetujeme před kontrolou
 
-      employeeCount++;
+            // KONTROLA DUPLICITY: Projdeme již existující zaměstnance
+            for(let i = 0; i < employees.length; i++){
+                // Pokud datum nového zaměstnance odpovídá datumu existujícího...
+                if(employees[i].birthdate === employee.birthdate){
+                    isDuplicate = true; // ... nastavíme příznak a cyklus se zopakuje
+                    break; // Ukončíme for cyklus, nemusíme kontrolovat dál
+                }
+            }
+        }
+        
+        // Zde je employee unikátní
+        employees.push({
+            name: employee.name,
+            surname: employee.surname,
+            gender: employee.gender,
+            birthdate: employee.birthdate, 
+            workload: employee.workload
+        });
+
+        employeeCount++;
     };
 
  return employees;
