@@ -1,5 +1,5 @@
 /**
- * @brief Generuje náhodný seznam zaměstnanců na základě zadaného počtu a věkového limitu.
+* @description Generuje náhodný seznam zaměstnanců.
  * @param {object} dtoIn Vstupní objekt obsahující: count (počet zaměstnanců), age limit {min, max} (věkové rozpětí).
  * @returns {Array} dtoOut pole vygenerovaných zaměstnanců.
  */
@@ -15,7 +15,7 @@
         name: employee.name,
         surname: employee.surname,
         gender: employee.gender,
-        birthDate: employee.birthDate,
+        birthdate: employee.birthdate,
         workload: employee.workload
       });
 
@@ -96,11 +96,11 @@ function employeeRandom(dtoIn){
         
     };
 
-    let birthDate = randomBday(dtoIn.age.min, dtoIn.age.max);
+    let birthdate = randomBday(dtoIn.age.min, dtoIn.age.max);
 
-    birthDate.setUTCHours(0, 0, 0, 0);
+    birthdate.setUTCHours(0, 0, 0, 0);
 
-    birthDate = birthDate.toISOString();
+    birthdate = birthdate.toISOString();
 
     let workload = workLoadOpt[Math.floor(Math.random() * workLoadOpt.length)];
 
@@ -109,7 +109,7 @@ function employeeRandom(dtoIn){
         name,
         surname,
         gender,
-        birthDate,
+        birthdate,
         workload
     };
 }
