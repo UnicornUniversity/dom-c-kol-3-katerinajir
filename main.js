@@ -4,6 +4,7 @@
  * @returns {Array} dtoOut pole vygenerovaných zaměstnanců.
  */
 
+//Hlavní fuknce, která náhodně vytváří zaměstnance podle požadavků
 export function main(dtoIn) {
     let employeeCount = 0;
     let employees = [];
@@ -23,7 +24,7 @@ export function main(dtoIn) {
             for(let i = 0; i < employees.length; i++){
                 // Pokud datum nového zaměstnance odpovídá datumu existujícího...
                 if(employees[i].birthdate === employee.birthdate){
-                    isDuplicate = true; // ... nastavíme příznak a cyklus se zopakuje
+                    isDuplicate = true; // ... nastavíme na true a cyklus se zopakuje
                     break; // Ukončíme for cyklus, nemusíme kontrolovat dál
                 }
             }
@@ -80,6 +81,13 @@ const names = {
 
 const workLoadOpt = [10, 20, 30, 40];
 
+/**
+ * @description Generuje náhodné datum narození tak, aby věk osoby ležel v intervalu <minAge, maxAge>.
+ * @param {number} minAge Minimální věk v letech.
+ * @param {number} maxAge Maximální věk v letech.
+ * @returns {Date} Objekt Date s náhodným datem narození.
+ */
+
 function randomBday(minAge, maxAge) {
   const today = new Date();
   
@@ -97,33 +105,40 @@ function randomBday(minAge, maxAge) {
 
   return new Date(randomTime);
 }
- 
+
+/**
+ * @description Generuje objekt jednoho zaměstnance s náhodnými údaji (jméno, pohlaví, věk, úvazek).
+ * @param {object} dtoIn Vstupní objekt s věkovými limity.
+ * @returns {object} Objekt s údaji zaměstnance.
+ */
 
 function employeeRandom(dtoIn){
     let genderOpt = ["female", "male"];
     let name = "";
     let surname = "";
 
-    let gender = genderOpt[Math.floor(Math.random() * genderOpt.length)];
+    let gender = genderOpt[Math.floor(Math.random() * genderOpt.length)]; //Náhodný výber pohlaví
 
+    //Pokud je pohlaví žena, jména se vybírají z polí ženských jmen a příjmení
     if(gender === "female"){
         name = names.fNamesF[Math.floor(Math.random() * names.fNamesF.length)]
-        surname = names.lNamesF[Math.floor(Math.random() * names.lNamesF.length)]    
+        surname = names.lNamesF[Math.floor(Math.random() * names.lNamesF.length)]
+    //Pokud je pohlaví muž, jména se vybírají z polí mužských jmen a příjmení
     } else if(gender === "male"){
         name = names.fNamesM[Math.floor(Math.random() * names.fNamesM.length)]
         surname = names.lNamesM[Math.floor(Math.random() * names.lNamesM.length)]
         
     };
 
-    let birthdate = randomBday(dtoIn.age.min, dtoIn.age.max);
+    let birthdate = randomBday(dtoIn.age.min, dtoIn.age.max); //Načtení náhodného data narození v rámci požadovaného rozsahu
 
-    birthdate.setUTCHours(0, 0, 0, 0);
+    birthdate.setUTCHours(0, 0, 0, 0); //Nastavení času na půlnoc pro případ rozdílných časových zón 
 
-    birthdate = birthdate.toISOString();
+    birthdate = birthdate.toISOString(); //Převedení na ISO formát 
 
-    let workload = workLoadOpt[Math.floor(Math.random() * workLoadOpt.length)];
+    let workload = workLoadOpt[Math.floor(Math.random() * workLoadOpt.length)]; //Náhodné generování úvazku
 
-  
+  //Vrácení pole zaměstnaců
     return{
         name,
         surname,
